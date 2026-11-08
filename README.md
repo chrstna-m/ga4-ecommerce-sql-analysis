@@ -66,9 +66,25 @@ LIMIT 5;
 
 Key Takeaway: Home and main product catalog pages drove the vast majority of pageviews, highlighting the core entry points for store traffic.
 
+### **Query 4: Audience Segmentation by Device Category**
+* **Business Context:** Analyzed user hardware properties (`device.category`) to determine mobile vs. desktop visitor distribution across the platform.
 
+```sql
+SELECT 
+  device.category AS device_type,
+  COUNT(DISTINCT user_pseudo_id) AS user_count,
+  COUNT(*) AS total_events
+FROM 
+  `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+WHERE 
+  _TABLE_SUFFIX BETWEEN '20210101' AND '20210107'
+GROUP BY 
+  device_type
+ORDER BY 
+  user_count DESC;
+```
+<img width="959" height="476" alt="image" src="https://github.com/user-attachments/assets/4fc7f828-fd12-4c04-866d-c5abaae935db" />
 
-
-
+Key Takeaway: Desktop users accounted for the highest traffic share, signaling the primary target hardware platform for web optimization and UX enhancements.
 
 
