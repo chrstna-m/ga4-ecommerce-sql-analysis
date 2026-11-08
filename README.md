@@ -43,3 +43,32 @@ LIMIT 5;
 <img width="959" height="475" alt="Screenshot 2026-11-08 194354" src="https://github.com/user-attachments/assets/e79751f5-40e3-420a-af36-fa5c6417bd90" />
 
 Key Takeaway: Routine navigation and session initialization events dominated user activity, indicating healthy ongoing engagement with the platform interface.
+
+### **Query 3: Most Viewed Pages (Page Engagement)**
+* **Business Context:** Extracted nested `page_title` parameters from raw event arrays to isolate the top 5 most viewed site pages.
+
+```sql
+SELECT 
+  (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'page_title') AS page_title,
+  COUNT(*) AS page_views
+FROM 
+  `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+WHERE 
+  event_name = 'page_view'
+  AND _TABLE_SUFFIX BETWEEN '20210101' AND '20210107'
+GROUP BY 
+  page_title
+ORDER BY 
+  page_views DESC
+LIMIT 5;
+```
+<img width="959" height="473" alt="Screenshot 2026-11-08 195712" src="https://github.com/user-attachments/assets/e0197e6d-4981-448d-ae3f-5c90d721ba6a" />
+
+Key Takeaway: Home and main product catalog pages drove the vast majority of pageviews, highlighting the core entry points for store traffic.
+
+
+
+
+
+
+
