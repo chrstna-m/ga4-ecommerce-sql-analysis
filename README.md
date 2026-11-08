@@ -14,5 +14,6 @@ GROUP BY
   event_date
 ORDER BY 
   event_date ASC;
+```
 <img width="958" height="473" alt="Screenshot 2026-11-08 185359" src="https://github.com/user-attachments/assets/824e10cb-f4d4-4df3-8176-69efa96d7cc2" />
 Key Takeaway: Daily unique visitors climbed steadily from 2,160 users on 2021-01-01 to a peak of 5,486 users on 2021-01-06, driving over 56,000 total events on peak days.
