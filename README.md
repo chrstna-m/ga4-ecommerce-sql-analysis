@@ -1,7 +1,7 @@
 # ga4-ecommerce-sql-analysis
 Exploratory SQL analysis of 100k+ GA4 e-commerce events using Google BigQuery.
 Business Context: Analyzed raw GA4 daily events to calculate unique visitors vs. overall interaction volume across a 7-day period.
-
+```sql
 SELECT 
   event_date,
   COUNT(DISTINCT user_pseudo_id) AS total_users,
