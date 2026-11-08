@@ -87,4 +87,34 @@ ORDER BY
 
 Key Takeaway: Desktop users accounted for the highest traffic share, signaling the primary target hardware platform for web optimization and UX enhancements.
 
+### **Query 5: New vs. Returning User Acquisition Funnel**
+* **Business Context:** Constructed a Common Table Expression (CTE) aggregating `first_visit` and `first_open` signals to isolate newly acquired visitors from returning traffic.
+
+```sql
+WITH UserActivity AS (
+  SELECT 
+    user_pseudo_id,
+    MAX(IF(event_name IN ('first_visit', 'first_open'), 1, 0)) AS is_new_user
+  FROM 
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+  WHERE 
+    _TABLE_SUFFIX BETWEEN '20210101' AND '20210107'
+  GROUP BY 
+    user_pseudo_id
+)
+SELECT 
+  COUNT(*) AS total_active_users,
+  SUM(is_new_user) AS new_users,
+  COUNT(*) - SUM(is_new_user) AS returning_users
+FROM 
+  UserActivity;
+```
+<img width="959" height="476" alt="Screenshot 2026-11-08 201103" src="https://github.com/user-attachments/assets/4f6fc437-5e83-4ee1-8185-8dcc7ca79b63" />
+
+Key Takeaway: Newly acquired users accounted for the vast majority of active weekly traffic, demonstrating effective top-of-funnel customer acquisition campaigns.
+
+
+
+
+
 
